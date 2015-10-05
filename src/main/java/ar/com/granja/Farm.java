@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Farm {
 
-	
+	private int userID;
 	private int idFarm;
 	private String name;
 	private List<Chicken> chickens;
@@ -27,6 +27,12 @@ public class Farm {
 	}
 	public void setIdFarm(int idFarm) {
 		this.idFarm = idFarm;
+	}
+	public int getUserID() {
+		return userID;
+	}
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	
 	

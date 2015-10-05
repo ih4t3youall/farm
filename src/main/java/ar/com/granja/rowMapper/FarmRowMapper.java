@@ -16,6 +16,7 @@ public class FarmRowMapper implements RowMapper<Farm> {
 		Farm farm = new Farm();
 		farm.setName(rs.getString("name"));
 		farm.setIdFarm(rs.getInt("idFarm"));
+		farm.setUserID(rs.getInt("users_USER_ID"));
 		return farm;
 		
 	}

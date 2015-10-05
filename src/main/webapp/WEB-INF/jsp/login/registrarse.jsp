@@ -41,6 +41,7 @@
 
 
 <script src="resources/Metro-UI-CSS-master/build/js/metro.js"></script>
+<script src="resources/javascript/validacion.js"></script>
 
 </head>
 
@@ -53,43 +54,37 @@
 				
 		var flag = campoVacio(nombreUsuario)
 		
-		if(flag){
-			$('#nombreUsuario').submit();
+		var cont = 0;
+		console.log(flag);
+		if(!flag){
 			
+			cont ++;
 		}else{
 			alert('El campo nombre de usuario es requerido.')
 			
 		}
 		
 		var flag2 = passwdIguales($('#passwd1').val(),$('#passwd2').val());
-		alert(flag2);
+		if (flag2){
+			
+			
+			cont ++;
+		}else {
+			
+			alert('las contraseñas no coinciden');
+			
+		}
+		
+		if(cont == 2){
+			
+			$('#agregarUsuario').submit();
+			
+		}
 		
 		
 
 	}
 	
-	function passwdIguales(clave1,clave2){
-	    //tofix comprobar que no sean vacios
-
-	    if (clave1 == clave2)
-	       return true;
-	    else
-	       return false;
-	} 
-
-	function campoVacio(campo) {
-		
-		if ($(campo).length == 1) {
-
-			return false;
-
-		} else {
-
-			return true;
-
-		}
-
-	}
 </script>
 </head>
 
@@ -105,7 +100,7 @@
 		<div class="row">
 			<div class="span6 offset4">
 				<div class="example">
-					<form:form method="post" name="usuarioDTO" id="createFarm"
+					<form:form method="post" name="usuarioDTO" id="agregarUsuario"
 						action="agregarUsuario.htm" modelAttribute="usuarioDTO">
 						<fieldset>
 							<div class="input-control modern text">
@@ -116,7 +111,7 @@
 							</div>
 							<br />
 							<div class="input-control modern text">
-								<input id="passwd1" type="text"> <span class="label">Ingrese
+								<form:input id="passwd1" type="text" path="passwd"/> <span class="label">Ingrese
 									su passwd.</span> <span class="informer"></span> <span
 									class="placeholder">Password</span>
 							</div>

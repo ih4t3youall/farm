@@ -1,5 +1,6 @@
 package ar.com.granja.controllers;
 
+import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,8 +14,10 @@ import ar.com.granja.Chicken;
 import ar.com.granja.Farm;
 import ar.com.granja.bo.ChickenBO;
 import ar.com.granja.bo.GranjaBO;
+import ar.com.granja.bo.UsuarioBO;
 import ar.com.granja.dto.FarmDTO;
 import ar.com.granja.dto.SaveChickenDTO;
+import ar.com.granja.dto.UsuarioDTO;
 
 @Controller
 public class MainController {
@@ -22,7 +25,20 @@ public class MainController {
 	private GranjaBO granjaBO;
 
 	private ChickenBO chickenBO;
+	
+	private UsuarioBO usuarioBO;
+	
+	private UsuarioDTO usuarioDTO;
 
+	@RequestMapping("crearUsuario.htm")
+	public ModelAndView crearUsuario(Principal principal){
+		
+		UsuarioDTO obtenerUsuario = usuarioBO.obtenerUsuario(principal.getName());
+		usuarioDTO = obtenerUsuario;
+		return inicio();
+	}
+	
+	
 	@RequestMapping("inicio.htm")
 	public ModelAndView inicio() {
 
@@ -93,7 +109,8 @@ public class MainController {
 	@RequestMapping("administrarGranjas.htm")
 	public ModelAndView administrarGranjas() {
 		ModelAndView mav = new ModelAndView("/administrar/administrarGranjas");
-		List<Farm> farms = granjaBO.hayGranjas();
+		
+		List<Farm> farms = granjaBO.hayGranjas(usuarioDTO.getIdUser());
 
 		List<FarmDTO> farmsDTO = procesFarm(farms);
 		mav.addObject("farms", farmsDTO);
@@ -163,6 +180,7 @@ public class MainController {
 	@RequestMapping("saveFarm.htm")
 	public ModelAndView createFarm(Farm farm) {
 		ModelAndView mav = new ModelAndView("/granjaCreada");
+		farm.setUserID(usuarioDTO.getIdUser());
 		if (farm.getName() != "" && farm.getName() != null) {
 			try {
 				granjaBO.crearGranja(farm);
@@ -192,5 +210,27 @@ public class MainController {
 	public void setChickenBO(ChickenBO chickenBO) {
 		this.chickenBO = chickenBO;
 	}
+
+
+	public UsuarioBO getUsuarioBO() {
+		return usuarioBO;
+	}
+
+
+	public void setUsuarioBO(UsuarioBO usuarioBO) {
+		this.usuarioBO = usuarioBO;
+	}
+
+
+	public UsuarioDTO getUsuarioDTO() {
+		return usuarioDTO;
+	}
+
+
+	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+		this.usuarioDTO = usuarioDTO;
+	}
+	
+	
 
 }

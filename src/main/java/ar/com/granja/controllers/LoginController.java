@@ -1,14 +1,22 @@
 package ar.com.granja.controllers;
 
+import java.sql.SQLException;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.com.granja.bo.UsuarioBO;
 import ar.com.granja.dto.UsuarioDTO;
 
 @Controller
 public class LoginController {
 
+	private UsuarioBO usuarioBO;
+	
+	
 	@RequestMapping("/login.htm")
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView("login/login");
@@ -16,9 +24,11 @@ public class LoginController {
 
 	}
 
-	@RequestMapping("/loginfailed.htm")
-	public ModelAndView loginfailed() {
-		ModelAndView mav = new ModelAndView("login/loginfailed");
+	@RequestMapping(value="/loginfailed.htm", method = RequestMethod.GET)
+	public ModelAndView loginfailed(ModelMap model) {
+		ModelAndView mav = new ModelAndView("login/login");
+		mav.addObject("error","true");
+		
 
 		return mav;
 
@@ -36,10 +46,35 @@ public class LoginController {
 
 	@RequestMapping("agregarUsuario.htm")
 	public ModelAndView agregarUsuario(UsuarioDTO usuarioDTO) {
-		ModelAndView mav = new ModelAndView("login/registrarse");
-		mav.addObject("usuarioDTO", usuarioDTO);
+		ModelAndView mav = new ModelAndView("exito/crearUsuarioExito");
+		try {
+			usuarioBO.guardarUsuario(usuarioDTO);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mav.addObject("nombreUsuario", usuarioDTO.getNombreUsuario());
 		return mav;
 
 	}
+	
+	@RequestMapping(value="/logout.htm", method = RequestMethod.GET)
+	public ModelAndView logout(ModelMap model) {
+ 
+		ModelAndView mav = new ModelAndView("/login/logout");
+		
+		return mav;
+ 
+	}
+
+	public UsuarioBO getUsuarioBO() {
+		return usuarioBO;
+	}
+
+	public void setUsuarioBO(UsuarioBO usuarioBO) {
+		this.usuarioBO = usuarioBO;
+	}
+	
+	
 
 }

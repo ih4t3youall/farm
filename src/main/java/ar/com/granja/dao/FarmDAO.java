@@ -1,10 +1,9 @@
 package ar.com.granja.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import ar.com.granja.Farm;
 import ar.com.granja.rowMapper.FarmRowMapper;
@@ -24,8 +23,8 @@ public class FarmDAO {
 
 	public void createFarm(Farm farm) throws org.springframework.dao.DuplicateKeyException {
 
-		String sql = "insert into Farm (name)values (?)";
-		jdbcTemplate.update(sql, new Object[] { farm.getName() });
+		String sql = "insert into Farm (name,users_USER_ID)values (?,?)";
+		jdbcTemplate.update(sql, new Object[] { farm.getName(),farm.getUserID() });
 		 
 	}
 	
@@ -46,11 +45,21 @@ public class FarmDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	public List<Farm> getFarms() {
-		String sql = "select * from Farm";
-		List<Farm> farms = jdbcTemplate.query(sql, new FarmRowMapper());
-
+	public List<Farm> getFarmsByUserId(int userId) {
+		//fix granjas por usuario
+		
+		String sql = "select * from Farm inner join users on Farm.users_USER_ID = users.USER_ID where users.user_id = ?";
+		List<Farm> farms = null;
+		try{
+		farms = jdbcTemplate.query(sql,new Object[]{userId}, new FarmRowMapper());
 		return farms;
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ArrayList<Farm>();
+		}
+		
+		
+		
 	}
 
 

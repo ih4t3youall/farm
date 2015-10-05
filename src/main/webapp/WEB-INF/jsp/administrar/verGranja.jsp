@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -44,6 +44,24 @@
 
 <script type="text/javascript">
 	var idGranja = ${farm.idFarm};
+	$( document ).ready(function() {
+	
+		var suma = 0;
+		$( ".huevos" ).each(function( index,item ) {
+		  suma = suma +parseInt($(item).html());
+		  
+		});
+		
+		
+		$('#huevosTotales').html("Esta granja tiene un total de "+suma+" huevos")
+		
+		
+		
+	});
+	
+	
+	
+	
 	
 	function agregarGallina() {
 
@@ -129,7 +147,7 @@
 							<c:choose>
 								<c:when test="${chicken.eggs > 0}">
 
-									<p>Esta gallina tiene ${chicken.eggs} huevos</p>
+									<p>Esta gallina tiene<span class="huevos"> ${chicken.eggs}</span> huevos</p>
 								</c:when>
 
 								<c:otherwise>
@@ -159,6 +177,8 @@
 					granja</span>
 			</div>
 		</div>
+		
+		<p style="color:white" id="huevosTotales"></p>
 
 	</div>
 	<button class="button primary" onclick="agregarGallina()">Agregar

@@ -1,8 +1,7 @@
 package ar.com.granja.bo;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import ar.com.granja.Farm;
 import ar.com.granja.dao.ChickenDAO;
@@ -29,10 +28,13 @@ public class GranjaBO {
 	}
 
 
-	public List<Farm> hayGranjas() {
+	public List<Farm> hayGranjas(int userId) {
 
-		List<Farm> farms = farmDAO.getFarms();
+		List<Farm> farms = farmDAO.getFarmsByUserId(userId);
+		if(farms.size() != 0){
 		 chickenDAO.getChickensOfFarms(farms);
+		}
+		
 		 return farms;
 
 	}

@@ -35,7 +35,7 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-	
+
 	<bean id="farmDAO" class="ar.com.granja.dao.FarmDAO">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
@@ -52,10 +52,12 @@
 		<property name="farmDAO" ref="farmDAO" />
 		<property name="chickenDAO" ref="chickenDAO" />
 	</bean>
-	
+
 	<bean id="mainController" class="ar.com.granja.controllers.MainController">
 		<property name="granjaBO" ref="granjaBO"></property>
 		<property name="chickenBO" ref="chickenBO"></property>
+		<property name="usuarioDTO" ref="usuarioDTO"></property>
+		<property name="usuarioBO" ref="usuarioBO"></property>
 	</bean>
 
 
@@ -64,6 +66,28 @@
 	</bean>
 
 
+	<bean id="userRoleDAO" class="ar.com.granja.dao.UserRoleDAO">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+
+	<bean id="usuarioDAO" class="ar.com.granja.dao.UsuarioDAO">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+
+	<bean id="usuarioBO" class="ar.com.granja.bo.UsuarioBO">
+		<property name="usuarioDAO" ref="usuarioDAO" />
+		<property name="userRoleDAO" ref="userRoleDAO"/>
+	</bean>
+
+	<bean id="loginController" class="ar.com.granja.controllers.LoginController">
+		<property name="usuarioBO" ref="usuarioBO" />
+
+	</bean>
+
+<bean id="usuarioDTO" class="ar.com.granja.dto.UsuarioDTO">
+
+
+</bean>
 
 
 
@@ -71,7 +95,7 @@
 	<mvc:interceptors>
 		<bean class="ar.com.granja.hook.ExecuteTimeInterceptor" />
 	</mvc:interceptors>
-	
+
 
 
 

@@ -5,6 +5,7 @@ public class UsuarioDTO {
 	private String nombreUsuario;
 	private String passwd;
 	private String role;
+	private int idUser;
 
 	public String getNombreUsuario() {
 		return nombreUsuario;
@@ -28,6 +29,14 @@ public class UsuarioDTO {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
 }

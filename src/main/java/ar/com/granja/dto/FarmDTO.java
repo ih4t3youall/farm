@@ -5,10 +5,19 @@ public class FarmDTO {
 	private int chickenCount;
 	private int eggCount;
 	private String name;
+	private int userID;
 
 	
 	
 	
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
 	public String getName() {
 		return name;
 	}
