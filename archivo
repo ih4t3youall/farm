@@ -1,0 +1,24 @@
+[INFO] Scanning for projects...
+[ERROR] [ERROR] Some problems were encountered while processing the POMs:
+[ERROR] 'dependencies.dependency.version' for org.springframework:spring-core:jar must be a valid version but is '${spring.version}'. @ line 17, column 22
+[ERROR] 'dependencies.dependency.version' for org.springframework:spring-web:jar must be a valid version but is '${spring.version}'. @ line 23, column 22
+[ERROR] 'dependencies.dependency.version' for org.springframework:spring-webmvc:jar must be a valid version but is '${spring.version}'. @ line 29, column 22
+[ERROR] 'dependencies.dependency.version' for org.springframework.security:spring-security-core:jar must be a valid version but is '${spring.version}'. @ line 36, column 22
+[ERROR] 'dependencies.dependency.version' for org.springframework.security:spring-security-web:jar must be a valid version but is '${spring.version}'. @ line 42, column 22
+[ERROR] 'dependencies.dependency.version' for org.springframework.security:spring-security-config:jar must be a valid version but is '${spring.version}'. @ line 48, column 22
+ @ 
+[ERROR] The build could not read 1 project -> [Help 1]
+[ERROR]   
+[ERROR]   The project ar.com.granja:granja:1.0-SNAPSHOT (C:\Users\juan.m.lequerica\granjaWorkspace2\granja\pom.xml) has 6 errors
+[ERROR]     'dependencies.dependency.version' for org.springframework:spring-core:jar must be a valid version but is '${spring.version}'. @ line 17, column 22
+[ERROR]     'dependencies.dependency.version' for org.springframework:spring-web:jar must be a valid version but is '${spring.version}'. @ line 23, column 22
+[ERROR]     'dependencies.dependency.version' for org.springframework:spring-webmvc:jar must be a valid version but is '${spring.version}'. @ line 29, column 22
+[ERROR]     'dependencies.dependency.version' for org.springframework.security:spring-security-core:jar must be a valid version but is '${spring.version}'. @ line 36, column 22
+[ERROR]     'dependencies.dependency.version' for org.springframework.security:spring-security-web:jar must be a valid version but is '${spring.version}'. @ line 42, column 22
+[ERROR]     'dependencies.dependency.version' for org.springframework.security:spring-security-config:jar must be a valid version but is '${spring.version}'. @ line 48, column 22
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException

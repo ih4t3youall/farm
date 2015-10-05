@@ -1,0 +1,83 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<context:component-scan base-package="ar.com.granja.controllers" />
+	<mvc:annotation-driven />
+
+	<!-- <mvc:view-controller path="/" view-name="index"/> -->
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/granja" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<bean id="farmDAO" class="ar.com.granja.dao.FarmDAO">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="chickenDAO" class="ar.com.granja.dao.ChickenDAO">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="granjaBO" class="ar.com.granja.bo.GranjaBO">
+		<property name="farmDAO" ref="farmDAO" />
+		<property name="chickenDAO" ref="chickenDAO" />
+	</bean>
+	
+	<bean id="mainController" class="ar.com.granja.controllers.MainController">
+		<property name="granjaBO" ref="granjaBO"></property>
+		<property name="chickenBO" ref="chickenBO"></property>
+	</bean>
+
+
+	<bean id="chickenBO" class="ar.com.granja.bo.ChickenBO">
+		<property name="chickenDAO" ref="chickenDAO" />
+	</bean>
+
+
+
+
+
+	<!-- interceptor -->
+	<mvc:interceptors>
+		<bean class="ar.com.granja.hook.ExecuteTimeInterceptor" />
+	</mvc:interceptors>
+	
+
+
+
+
+
+
+
+
+</beans>
