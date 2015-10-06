@@ -112,9 +112,9 @@ function agregarGallina() {
 		<div class="grid">
 			<div class="row cells2">
 				<div class="cell">
-					<label>Ingrese nombre de la gallina</label>
-					<div class="input-control text full-size">
-						<input id="nombre" type="text">
+					<label>Ingrese nombre de la gallina (maximo 11 caracteres)</label>
+					<div  class="input-control text full-size">
+						<input maxlength="11" id="nombre" type="text">
 					</div>
 				</div>
 				<div class="cell">

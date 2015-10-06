@@ -111,13 +111,13 @@
 							</div>
 							<br />
 							<div class="input-control modern text">
-								<form:input id="passwd1" type="text" path="passwd"/> <span class="label">Ingrese
+								<form:input id="passwd1" type="password" path="passwd"/> <span class="label">Ingrese
 									su passwd.</span> <span class="informer"></span> <span
 									class="placeholder">Password</span>
 							</div>
 							<br />
 							<div class="input-control modern text">
-								<input id="passwd2" type="text"> <span class="label">Repita
+								<input id="passwd2" type="password"> <span class="label">Repita
 									su passwd</span> <span class="informer"></span> <span
 									class="placeholder">password</span>
 							</div>

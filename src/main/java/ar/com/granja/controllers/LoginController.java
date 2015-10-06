@@ -27,7 +27,7 @@ public class LoginController {
 	@RequestMapping(value="/loginfailed.htm", method = RequestMethod.GET)
 	public ModelAndView loginfailed(ModelMap model) {
 		ModelAndView mav = new ModelAndView("login/login");
-		mav.addObject("error","true");
+		mav.addObject("error","Usuario o contraseña incorrectos.");
 		
 
 		return mav;

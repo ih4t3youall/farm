@@ -47,14 +47,16 @@
 	$( document ).ready(function() {
 	
 		var suma = 0;
-		$( ".huevos" ).each(function( index,item ) {
+		$(".huevos").each(function( index,item ) {
 		  suma = suma +parseInt($(item).html());
 		  
 		});
 		
-		
+		if(suma > 0){
 		$('#huevosTotales').html("Esta granja tiene un total de "+suma+" huevos")
-		
+		}else{
+			$('#huevosTotales').html("Esta granja no tiene huevos.")	
+		}
 		
 		
 	});

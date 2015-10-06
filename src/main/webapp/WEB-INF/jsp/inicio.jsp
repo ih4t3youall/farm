@@ -43,7 +43,7 @@
             </div>
             <div  onclick="location.href='j_spring_security_logout';" data-role="tile" class="tile bg-cyan fg-white">
                 <div class="tile-content iconic">
-                    <span class="icon mif-plus"></span>
+                    <span class="icon mif-settings-power"></span>
                     
                     <span class="tile-label">Logout</span>
                 </div>

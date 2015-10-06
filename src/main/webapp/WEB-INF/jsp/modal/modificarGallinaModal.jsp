@@ -7,6 +7,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<script type="text/javascript">
+function justNumbers(e)
+{
+var keynum = window.event ? window.event.keyCode : e.which;
+if ((keynum == 8) || (keynum == 46))
+return true;
+ 
+return /\d/.test(String.fromCharCode(keynum));
+}
+
+
+
+</script>
 </head>
 <body>
 
@@ -17,7 +31,7 @@
 						action="updateChicken.htm" modelAttribute="chickenDTO">
 						<div class="input-control text full-size">
 							<p>Huevos</p>
-							<form:input type="text" path="eggs"  />
+							<form:input type="text" onkeypress="return justNumbers(event);" path="eggs"  />
 							<p>Nombre</p>
 							<form:input  type="text" path="name"  />
 							<form:input type="text" path="idFarm" style="display: none;"/>
