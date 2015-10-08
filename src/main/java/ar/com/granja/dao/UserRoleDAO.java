@@ -10,7 +10,7 @@ public class UserRoleDAO {
 
 	public void saveUserRole(UsuarioDTO usuarioDTO) {
 
-		String sql = "INSERT INTO granja.user_roles (USER_ID,AUTHORITY) VALUES (?, 'ROLE_USER');";
+		String sql = "INSERT INTO user_roles (USER_ID,AUTHORITY) VALUES (?, 'ROLE_USER');";
 		jdbcTemplate.update(sql, new Object[] { usuarioDTO.getIdUser() });
 
 	}

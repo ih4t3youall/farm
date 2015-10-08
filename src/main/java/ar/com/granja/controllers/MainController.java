@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,14 +30,11 @@ public class MainController {
 	
 	private UsuarioBO usuarioBO;
 	
-	private UsuarioDTO usuarioDTO;
 
-	@RequestMapping("crearUsuario.htm")
-	public ModelAndView crearUsuario(Principal principal){
-		
-		UsuarioDTO obtenerUsuario = usuarioBO.obtenerUsuario(principal.getName());
-		usuarioDTO = obtenerUsuario;
-		return inicio();
+	public UsuarioDTO crearUsuario(){
+		User principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UsuarioDTO usuarioDTO = usuarioBO.obtenerUsuario(principal.getUsername());
+		return usuarioDTO;
 	}
 	
 	
@@ -51,6 +50,7 @@ public class MainController {
 		for (Farm farm : farms) {
 
 			FarmDTO farmDTO = new FarmDTO();
+			farmDTO.setFarmId(farm.getIdFarm());
 			farmDTO.setName(farm.getName());
 			if (farm.getChickens().size() != 0) {
 				farmDTO.setChickenCount(farm.getChickens().size());
@@ -110,12 +110,12 @@ public class MainController {
 	public ModelAndView administrarGranjas() {
 		ModelAndView mav = new ModelAndView("/administrar/administrarGranjas");
 		
-		List<Farm> farms = granjaBO.hayGranjas(usuarioDTO.getIdUser());
+						List<Farm> farms = granjaBO.hayGranjas(crearUsuario().getIdUser());
 
 		List<FarmDTO> farmsDTO = procesFarm(farms);
 		mav.addObject("farms", farmsDTO);
 		mav.addObject("formFarm", new Farm());
-
+	
 		return mav;
 
 	}
@@ -124,10 +124,13 @@ public class MainController {
 	public ModelAndView verGranja(Farm farmDTO) {
 		ModelAndView mav = new ModelAndView("administrar/verGranja");
 
-		Farm farm = granjaBO.obtenerGranjaPorNombre(farmDTO);
+//		Farm farm = granjaBO.obtenerGranjaPorNombre(farmDTO);
+				List<Chicken> chickens = chickenBO.obtenerPollitosDeGranja(farmDTO);
+				farmDTO.setChickens(chickens);
+		
 		Chicken chickenDTO = new Chicken();
 		mav.addObject("chickenDTO", chickenDTO);
-		mav.addObject("farm", farm);
+		mav.addObject("farm", farmDTO);
 
 		return mav;
 
@@ -180,7 +183,7 @@ public class MainController {
 	@RequestMapping("saveFarm.htm")
 	public ModelAndView createFarm(Farm farm) {
 		ModelAndView mav = new ModelAndView("/granjaCreada");
-		farm.setUserID(usuarioDTO.getIdUser());
+		farm.setUserID(crearUsuario().getIdUser());
 		if (farm.getName() != "" && farm.getName() != null) {
 			try {
 				granjaBO.crearGranja(farm);
@@ -222,15 +225,6 @@ public class MainController {
 	}
 
 
-	public UsuarioDTO getUsuarioDTO() {
-		return usuarioDTO;
-	}
-
-
-	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
-		this.usuarioDTO = usuarioDTO;
-	}
-	
 	
 
 }

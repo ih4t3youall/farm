@@ -75,7 +75,16 @@
 			
 		}
 		
-		if(cont == 2){
+		if($('#passwd1').val().length > 0 && $('#passwd2').val().length > 0){
+			
+			cont++;
+		}else {
+			
+			alert('Las passwords deben tener ambas al menos 1 caracter.')
+			
+		}
+		
+		if(cont == 3){
 			
 			$('#agregarUsuario').submit();
 			

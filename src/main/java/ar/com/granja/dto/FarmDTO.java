@@ -2,6 +2,7 @@ package ar.com.granja.dto;
 
 public class FarmDTO {
 
+	private int farmId;
 	private int chickenCount;
 	private int eggCount;
 	private String name;
@@ -10,6 +11,15 @@ public class FarmDTO {
 	
 	
 	
+
+	public int getFarmId() {
+		return farmId;
+	}
+
+	public void setFarmId(int farmId) {
+		this.farmId = farmId;
+	}
+
 	public int getUserID() {
 		return userID;
 	}

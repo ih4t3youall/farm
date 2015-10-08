@@ -5,7 +5,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<script type="text/javascript" src="resources/jquery/jquery.js"></script>
 
 <script type="text/javascript" src="resources/jquery/jquery.js"></script>
 
@@ -28,10 +27,13 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
-	function campoVacio() {
-		if ($("#nombreGranja").val().length < 1) {
-			alert("El granja debe contener al menos 1 caracter");
 
+
+
+	function campoVacio() {
+		if ($("#nombreGranja").val().trim().length < 1) {
+			alert("El granja debe contener al menos 1 caracter, no admite espacios vacios.");
+			
 		} else {
 
 			$('#createFarm').submit();

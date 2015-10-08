@@ -1,8 +1,8 @@
 package ar.com.granja.bo;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import ar.com.granja.Chicken;
 import ar.com.granja.Farm;
 import ar.com.granja.dao.ChickenDAO;
 import ar.com.granja.dao.FarmDAO;
@@ -39,11 +39,10 @@ public class GranjaBO {
 
 	}
 
-	public Farm obtenerGranjaPorNombre(Farm farmDTO) {
+	public List<Chicken> obtenerGranjaPorNombre(Farm farmDTO) {
 		
-		 Farm farm= farmDAO.getFarmByName(farmDTO);
-		  chickenDAO.getChickenFromFarm(farm);
-		  return farm;
+		return  chickenDAO.getChickenFromFarm(farmDTO.getIdFarm());
+		
 	}
 
 	

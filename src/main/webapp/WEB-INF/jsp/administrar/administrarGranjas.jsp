@@ -78,6 +78,7 @@
 <form:form style="display: none;" method="post" name="farm" id="showFarm"
 				action="verGranja.htm" modelAttribute="formFarm">
 				 <form:input type="text" path="name" id="nombreGranja" />
+				 <form:input type="text" path="idFarm" id="farmId" />
 				  <input type="button" value="ver granja"/>
 				 
 					</form:form>

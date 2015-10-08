@@ -16,6 +16,11 @@
 
 	<!-- <mvc:view-controller path="/" view-name="index"/> -->
 
+	<!-- interceptor -->
+	<mvc:interceptors>
+		<bean class="ar.com.granja.hook.ExecuteTimeInterceptor" />
+	</mvc:interceptors>
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
@@ -56,7 +61,6 @@
 	<bean id="mainController" class="ar.com.granja.controllers.MainController">
 		<property name="granjaBO" ref="granjaBO"></property>
 		<property name="chickenBO" ref="chickenBO"></property>
-		<property name="usuarioDTO" ref="usuarioDTO"></property>
 		<property name="usuarioBO" ref="usuarioBO"></property>
 	</bean>
 
@@ -84,18 +88,15 @@
 
 	</bean>
 
-<bean id="usuarioDTO" class="ar.com.granja.dto.UsuarioDTO">
 
+
+
+
+
+
+<bean id="executeTimeInterceptor" class="ar.com.granja.hook.ExecuteTimeInterceptor">
 
 </bean>
-
-
-
-	<!-- interceptor -->
-	<mvc:interceptors>
-		<bean class="ar.com.granja.hook.ExecuteTimeInterceptor" />
-	</mvc:interceptors>
-
 
 
 

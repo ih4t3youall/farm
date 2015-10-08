@@ -1,7 +1,9 @@
 function passwdIguales(clave1,clave2){
 	    //tofix comprobar que no sean vacios
 
-	    if (clave1 == clave2)
+
+	
+	    if (clave1 == clave2 )
 	       return true;
 	    else
 	       return false;

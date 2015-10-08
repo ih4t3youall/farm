@@ -30,8 +30,8 @@ public class FarmDAO {
 	
 	public Farm getFarmByName(Farm farmDTO) {
 
-		String sql = "select * from Farm where name = ?";
-		Farm farm = jdbcTemplate.queryForObject(sql, new Object[]{farmDTO.getName()},new FarmRowMapper());
+		String sql = "select * from Farm where idFarm = ?";
+		Farm farm = jdbcTemplate.queryForObject(sql, new Object[]{farmDTO.getIdFarm()},new FarmRowMapper());
 		
 		return farm;
 		

@@ -38,10 +38,10 @@ public class ChickenDAO {
 
 	}
 	
-	public void getChickenFromFarm(Farm farm){
+	public List<Chicken> getChickenFromFarm(int idFarm){
 		String sql = "select * from chicken where Farm_idFarm = ?";
-		List<Chicken> chickens = jdbcTemplate.query(sql, new Object[]{farm.getIdFarm()},new ChickenRowMapper());
-		farm.setChickens(chickens);
+		List<Chicken> chickens = jdbcTemplate.query(sql, new Object[]{idFarm},new ChickenRowMapper());
+		return chickens;
 		
 		
 		
